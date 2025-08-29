@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <h1>Bat Ball Stump Game</h1>
+    <button
+      class="button"
+      onclick="userChoice='Bat';computerChoice=computerChoiceGenerator();result();document.getElementById('score').innerHTML=`won:${userwin}\nlost:${computerwin} \n tie:${tie}\n`"
+    >
+      <img src="Bat.jpg" alt="" height="100px" />Bat
+    </button>
+    <button
+      class="button"
+      onclick="userChoice='Ball';computerChoice= computerChoiceGenerator();result();document.getElementById('score').innerHTML=`won:${userwin} \n lost:${computerwin} \n tie:${tie}\n`;"
+    >
+      <img src="Ball.jpg" alt="" height="100px" />Ball
+    </button>
+    <button
+      class="button"
+      onclick="userChoice='Stump';computerChoice= computerChoiceGenerator();result();document.getElementById('score').innerHTML=`won:${userwin} \n lost:${computerwin}\ntie:${tie}\n`;"
+    >
+      <img src="Stump.jpg" alt="" height="100px" />Stump
+    </button>
+    <button
+      onclick=" userwin=0;computerwin=0;tie=0;localStorage.setItem('tie','0');localStorage.setItem('userwin','0');
+        localStorage.setItem('computerwin','0');document.getElementById('score').innerHTML=`won:${localStorage.getItem('userwin')} \n lost:${localStorage.getItem('computerwin')}\ntie:${localStorage.getItem('tie')}\n`;"
+    >
+      <img src="Restart.jpg" alt="" height="100px" /> RESTART
+    </button>
+    <br /><br />
+    <div id="score">win=0: lost=0: tie=0</div>
+
+    <script>
+      let userwin = localStorage.getItem("userwin")
+        ? JSON.parse(localStorage.getItem("userwin"))
+        : 0;
+      let computerwin = localStorage.getItem("computerwin")
+        ? JSON.parse(localStorage.getItem("computerwin"))
+        : 0;
+      let tie = localStorage.getItem("tie")
+        ? JSON.parse(localStorage.getItem("tie"))
+        : 0;
+      console.log(userwin);
+      console.log(computerwin);
+      console.log(tie);
+
+      function computerChoiceGenerator() {
+        let ComputerChoice = Math.ceil(3 * Math.random());
+        if (ComputerChoice == 1) {
+          return "Bat";
+        } else if (ComputerChoice == 2) {
+          return "Ball";
+        } else {
+          return "Stump";
+        }
+      }
+
+      function result() {
+        if (userChoice == computerChoice) {
+          tie++;
+          alert(
+            "userChoice= " +
+              userChoice +
+              "\ncomputerChoice= " +
+              computerChoice +
+              `\nTie`
+          );
+          localStorage.setItem("tie", JSON.stringify(tie));
+        } else if (userChoice == "Bat" && computerChoice == "Ball") {
+          userwin++;
+          alert(
+            "userChoice= " +
+              userChoice +
+              "\ncomputerChoice= " +
+              computerChoice +
+              `\nUser Wins`
+          );
+          localStorage.setItem("userwin", JSON.stringify(userwin));
+        } else if (userChoice == "Ball" && computerChoice == "Stump") {
+          userwin++;
+          alert(
+            "userChoice= " +
+              userChoice +
+              "\ncomputerChoice= " +
+              computerChoice +
+              `\nUser Wins`
+          );
+          localStorage.setItem("userwin", JSON.stringify(userwin));
+        } else if (userChoice == "Stump" && computerChoice == "Bat") {
+          userwin++;
+          alert(
+            "userChoice= " +
+              userChoice +
+              "\ncomputerChoice= " +
+              computerChoice +
+              `\nUser Wins`
+          );
+          localStorage.setItem("userwin", JSON.stringify(userwin));
+        } else if (userChoice == "Ball" && computerChoice == "Bat") {
+          computerwin++;
+          alert(
+            "userChoice= " +
+              userChoice +
+              "\ncomputerChoice= " +
+              computerChoice +
+              `\ncomputer Wins`
+          );
+          localStorage.setItem("computerwin", JSON.stringify(computerwin));
+        } else if (userChoice == "Stump" && computerChoice == "Ball") {
+          computerwin++;
+          alert(
+            "userChoice= " +
+              userChoice +
+              "\ncomputerChoice= " +
+              computerChoice +
+              `\ncomputer Wins`
+          );
+          localStorage.setItem("computerwin", JSON.stringify(computerwin));
+        } else if (userChoice == "Bat" && computerChoice == "Stump") {
+          computerwin++;
+          alert(
+            "userChoice= " +
+              userChoice +
+              "\ncomputerChoice= " +
+              computerChoice +
+              `\ncomputer Wins`
+          );
+          localStorage.setItem("computerwin", JSON.stringify(computerwin));
+        }
+      }
+    </script>
+  </body>
+</html>
